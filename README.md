@@ -128,6 +128,7 @@ Request Object:
 {
   "price": number
 }
+
 ```
 
 Example Response:

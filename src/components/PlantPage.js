@@ -47,13 +47,25 @@ const filteredPlants = plants.filter(plant => {
   return false
 })
 
+// 2. I can delete a plant and it is still gone when I refresh the page.
+const deletePlant = (id) => {
+  setPlants(
+    plants.filter((plant) => {
+      if (plant.id === id) {
+        return false;
+      }
+      return true;
+    })
+  );
+};
+
   return (
     <main>
       <NewPlantForm addPlant={addPlant} url={url} />
       <Search searchPlants={searchPlants} updateSearch={setSearchPlants} />
-      <PlantList plants={filteredPlants} />
-
+      <PlantList plants={filteredPlants} url={url} deletePlant={deletePlant} />
       {/* change plants={plants} to plants={filteredPlants}  */}
+      {/* need to pass deletePlant down from plantList to plantCard */}
     </main>
   );
 }
