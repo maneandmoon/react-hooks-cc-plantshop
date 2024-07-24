@@ -5,12 +5,7 @@ import Search from "./Search";
 
 function PlantPage() {
   const url = "http://localhost:6001/plants";
-  //1. When the app starts, I can see all plants.
-  
   const [plants, setPlants] = useState([]);
-  
-  //2. I can add a new plant to the page by submitting the form.
-
   const [searchPlants, setSearchPlants] = useState("");
 
   useEffect(() => {
@@ -18,27 +13,14 @@ function PlantPage() {
 			.then((res) => res.json())
 			.then((data) => setPlants(data));
 	}, []);
- 
-//2. I can add a new plant to the page by submitting the form.
   
 function addPlant(newPlant){
   setPlants([...plants, newPlant]);
 }
 
-//4. I can search for plants by their name and see a filtered list of plants. 
-
 const updateSearch = (newSearch) => {
   setSearchPlants(newSearch)
 }
-// const filteredListings = listings.filter(el => {
-//   //compare search with el.description
-//   //make sure to lowercase everything
-//   //check if el.description contains search
-//   if(el.description.toLowerCase().includes(search.toLowerCase())){
-//     return true 
-//   }
-//   return false
-// })
 
 const filteredPlants = plants.filter(plant => {
   if (plant.name.toLowerCase().includes(searchPlants.toLowerCase())){
@@ -47,7 +29,6 @@ const filteredPlants = plants.filter(plant => {
   return false
 })
 
-// 2. I can delete a plant and it is still gone when I refresh the page.
 const deletePlant = (id) => {
   setPlants(
     plants.filter((plant) => {
@@ -64,8 +45,6 @@ const deletePlant = (id) => {
       <NewPlantForm addPlant={addPlant} url={url} />
       <Search searchPlants={searchPlants} updateSearch={setSearchPlants} />
       <PlantList plants={filteredPlants} url={url} deletePlant={deletePlant} />
-      {/* change plants={plants} to plants={filteredPlants}  */}
-      {/* need to pass deletePlant down from plantList to plantCard */}
     </main>
   );
 }
